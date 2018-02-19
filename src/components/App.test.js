@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+//var $ = window.jQuery = require('jquery') 
+
 Vue.config.productionTip = false
 
 it('does not crash', () => {
