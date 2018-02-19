@@ -10,8 +10,8 @@
       <h1>Welcome to Vue.js</h1>
     </div>
     <p>Check out my website <a v-bind:href="website">here</a>.
-    <p v-html:"websiteTag"></p> 
-      
+    <p v-html:"websiteTag"></p>
+<!--    <button @click="local()"> </button>]-->
       <p>{{ name }}</p>
     <div class="bottom">
       <a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a>
@@ -26,11 +26,17 @@
       name: "vinny",
       website: 'http://vincentdicairano.com/',
       websiteTag: "<a v-bind:href='website'>my website</a>"
-    })
-//    $(".bottom").click(function() {
-//      alert( "Handler for .click() called." );
-//  });
+    }),
+    methods: {
+//      local: function() {
+//        this.$getLocation()
+//          .then(coordinates => {
+//          console.log(coordinates);
+//        });
+//      }
+    }
   }
+  
 </script>
 
 <!-- CSS libraries -->
