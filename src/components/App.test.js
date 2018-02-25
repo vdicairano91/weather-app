@@ -3,6 +3,8 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
+Vue.http.headers.common['Access-Control-Allow-Origin'] = true
+
 it('does not crash', () => {
   const Ctor = Vue.extend(App)
   const vm = new Ctor().$mount()
