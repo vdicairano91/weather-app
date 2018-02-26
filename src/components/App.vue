@@ -48,7 +48,7 @@
     },
     methods: {
       fetchData: function () {
-        var apiURL = 'https://api.darksky.net/forecast/5f6017631b7105c5ca8dc4d7c06b3c88/37.8267,-122.4233'
+        var apiURL = 'http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=b5a22084378a2c6787847c6423574a62'
 //        this.$http.get( apiURL, function( data ) {
 //          this.items = data;
 //          console.log(data);
