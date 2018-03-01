@@ -9,7 +9,14 @@
       />
       <h1>Welcome to Vue.js</h1>
     </div>
-    <p>{{weather.body.currently.apparentTemperature}}</p>
+    <p>Current Temperature: {{weather.body.currently.apparentTemperature}}</p>
+    <p>Dew Point: {{weather.body.currently.dewPoint}}</p>
+    <p>Wind Speed: {{weather.body.currently.windSpeed}}</p>
+    <p>UV Index: {{weather.body.currently.uvIndex}}</p>
+    <p>Cloud Coverage: {{weather.body.currently.cloudCover}}</p>
+    <p>Visibility: {{weather.body.currently.visibility}}</p>
+    <p>Wind Direction: {{weather.body.currently.windBearing}}</p>
+    <div class="wind-arrow" v-bind:style="{transform: 'rotate(' + weather.body.currently.windBearing + 'deg)'}"></div>
     <div class="bottom">
       <a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a>
     </div>
@@ -62,7 +69,21 @@
 <!--<style src="normalize.css/normalize.css"></style>-->
 
 <style lang="scss" scoped>
-  @import "app.scss"
+  @import "app.scss";
+    
+    
+    .wind-arrow{
+      background: url(assets/windArrow.svg);
+      width: 70px;
+      height: 100px;
+      position: absolute;
+      top: 100px;
+      left: 200px;
+      transition: 2s;
+  }
+  #map{
+    width: 300px;
+  }
 </style>
 
 
@@ -75,3 +96,13 @@ lat +
 "," +
 lon +
 "?exclude=hourly,daily,alerts,flags";-->
+
+
+<!--
+
+$( ".temperature" ).text( data.currently.temperature);
+$( ".dewPoint" ).text( data.currently.dewPoint);
+$( ".windSpeed" ).text( data.currently.windSpeed);
+$( ".uvIndex" ).text( data.currently.uvIndex);
+$( ".cloudCover" ).text( data.currently.cloudCover);
+$( ".visibility" ).text( data.currently.visibility);-->
