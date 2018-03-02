@@ -1,34 +1,30 @@
 <template>
   <div id="app">
-    <div class="banner">
-      <img
-        src="https://vuejs.org/images/logo.png"
-        width="100"
-        alt="vue"
-        class="logo"
-      />
-      <h1>Welcome to Vue.js</h1>
+    <div class="temp-info">
+      <vue-google-autocomplete ref="address" id="map" classname="form-control" placeholder="Please type your address" v-on:placechanged="getAddressData"></vue-google-autocomplete>
+      <p>Current Temperature: {{weather.body.currently.apparentTemperature}}</p>
+      <p>Dew Point: {{weather.body.currently.dewPoint}}</p>
+      <p>Wind Speed: {{weather.body.currently.windSpeed}}</p>
+      <p>UV Index: {{weather.body.currently.uvIndex}}</p>
+      <p>Cloud Coverage: {{weather.body.currently.cloudCover}}</p>
+      <p>Visibility: {{weather.body.currently.visibility}}</p>
+      <p>Wind Direction: {{weather.body.currently.windBearing}}</p>
+      <div class="wind-arrow" v-bind:style="{transform: 'rotate(' + weather.body.currently.windBearing + 'deg)'}"></div>
     </div>
-    <p>Current Temperature: {{weather.body.currently.apparentTemperature}}</p>
-    <p>Dew Point: {{weather.body.currently.dewPoint}}</p>
-    <p>Wind Speed: {{weather.body.currently.windSpeed}}</p>
-    <p>UV Index: {{weather.body.currently.uvIndex}}</p>
-    <p>Cloud Coverage: {{weather.body.currently.cloudCover}}</p>
-    <p>Visibility: {{weather.body.currently.visibility}}</p>
-    <p>Wind Direction: {{weather.body.currently.windBearing}}</p>
-    <div class="wind-arrow" v-bind:style="{transform: 'rotate(' + weather.body.currently.windBearing + 'deg)'}"></div>
     <div class="bottom">
       <a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a>
     </div>
-    <vue-google-autocomplete
-                                   ref="address"
-                                   id="map"
-                                   classname="form-control"
-                                   placeholder="Please type your address"
-                                   v-on:placechanged="getAddressData"
-                                   >
-    </vue-google-autocomplete>
   </div>
+  
+
+<!--
+  <img
+       src="https://vuejs.org/images/logo.png"
+       width="100"
+       alt="vue"
+       class="logo"
+       />
+-->
 </template>
 <!--https://api.darksky.net/forecast/5f6017631b7105c5ca8dc4d7c06b3c88/37.8267,-122.4233-->
 <!--http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=b5a22084378a2c6787847c6423574a62-->
@@ -70,8 +66,11 @@
 
 <style lang="scss" scoped>
   @import "app.scss";
-    
-    
+  .temp-info{
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+  }
     .wind-arrow{
       background: url(assets/windArrow.svg);
       width: 70px;
@@ -83,6 +82,7 @@
   }
   #map{
     width: 300px;
+    margin: 50px 0;
   }
 </style>
 
