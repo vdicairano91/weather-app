@@ -1,19 +1,19 @@
 <template>
-  <div id="app">
+  <div id="app" v-bind:style="white.bkgd">
     <div class="temp-info">
       <vue-google-autocomplete ref="address" id="map" classname="form-control" placeholder="74th Street, Jackson Heights, NY, USA" v-on:placechanged="getAddressData"></vue-google-autocomplete>
       
       
-      <p class="currently-temp"><span v-html="Math.round(weather.body.currently.apparentTemperature)"></span>&deg;</p>
+      <p class="currently-temp" v-bind:style="main.color"><span v-html="Math.round(weather.body.currently.apparentTemperature)"></span>&deg;</p>
       
-      <p>Dew Point: {{weather.body.currently.dewPoint}}</p>
-      <p>Wind Speed: {{weather.body.currently.windSpeed}}</p>
-      <p>UV Index: {{weather.body.currently.uvIndex}}</p>
+      <p v-bind:style="black.color">Dew Point: {{weather.body.currently.dewPoint}}</p>
+      <p v-bind:style="black.color">Wind Speed: {{weather.body.currently.windSpeed}}</p>
+      <p v-bind:style="black.color">UV Index: {{weather.body.currently.uvIndex}}</p>
       <p>Icon: {{weather.body.currently.icon}}</p>
-      <p>Cloud Coverage: {{weather.body.currently.cloudCover}}</p>
-      <p>Visibility: {{weather.body.currently.visibility}}</p>
-      <p>Wind Direction: {{weather.body.currently.windBearing}}</p>
-      <p>{{weather.body.minutely.summary}}</p>
+      <p v-bind:style="black.color">Cloud Coverage: {{weather.body.currently.cloudCover}}</p>
+      <p v-bind:style="black.color">Visibility: {{weather.body.currently.visibility}}</p>
+      <p v-bind:style="black.color">Wind Direction: {{weather.body.currently.windBearing}}</p>
+<!--      <p v-bind:style="black.color">{{weather.body.minutely.summary}}</p>-->
       <div class="wind-arrow" v-bind:style="{transform: 'rotate(' + weather.body.currently.windBearing + 'deg)'}"></div>
     </div>
     <div class="currently-icon" v-bind:class="weather.body.currently.icon">
@@ -22,11 +22,11 @@
     <div class="bottom">
       <a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a>
     </div>
-    <div class="light-grey"></div>
-    <div class="grey"></div>
-    <div class="black"></div>
-    <div class="subMainBkgd"></div>
-    <div class="mainBkgd" v-bind:style="color.freezing"></div>
+    <div class="light-grey" v-bind:style="white.bkgd"><p v-bind:style="main.color">TESTING</p><p v-bind:style="subMain.color">TESTING</p></div>
+    <div class="grey" v-bind:style="grey.bkgd"></div>
+    <div class="black" v-bind:style="black.bkgd"></div>
+    <div class="subMainBkgd" v-bind:style="subMain.bkgd"></div>
+    <div class="mainBkgd" v-bind:style="main.bkgd"></div>
   
   
 
@@ -48,11 +48,25 @@
     data: function () {
       return {
         weather: [],
-        color: {
-          freezing: {backgroundColor: '#1963A0'},
-          cold: {backgroundColor: '#1985A1'},
+        main: {
+          bkgd: {backgroundColor: '#1963A0'},
+          color: {color: '#1963A0'},
         },
-        none: {
+        subMain: {
+          bkgd: {backgroundColor: '#4C5568'},
+          color: {color: '#4C5568'},
+        },
+        blackw: {
+          bkgd: {backgroundColor: '#333333'},
+          color: {color: '#333333'},
+        },
+        grey: {
+          bkgd: {backgroundColor: '#c4c4c4'},
+          color: {color: '#c4c4c4'},
+        },
+        white: {
+          bkgd: {backgroundColor: '#f7f7f7'},
+          color: {color: '#f7f7f7'},
         }
       }
     },
@@ -66,41 +80,37 @@
     },
     methods: {
       colorChange: function(temp) {
-        
-        if(temp >= 20){
-          this.color.freezing = 'backgroundColor: #1985A1'
-          //        this.info = value;
-          console.log(this.color.freezing)
-          //            this.$el.subMainBkgd.backgroundColor = "#4C5568";
-          //            this.$el.subMain.color = "#4C5568";
-          //            this.$el.mainBkgd.backgroundColor = "#1963A0";
-          //            this.$el.main.color = "#1963A0";
-        } else if(temp < 20 && temp >= 40){
-//          value = this.color.cold;
-
-          //        this.info = value;
-//          console.log(value)
-          //            this.$el.subMainBkgd.backgroundColor = "#4C5C68";
-          //            this.$el.subMain.color = "#4C5C68";
-          //            this.$el.mainBkgd.backgroundColor = "#1985A1";
-          //            this.$el.main.color = "#1985A1";
-        } else if(temp < 40 && temp >= 60){
-          //            this.$el.subMainBkgd.backgroundColor = "#4C6368";
-          //            this.$el.subMain.color = "#4C6368";
-          //            this.$el.mainBkgd.backgroundColor = "#19A099";
-          //            this.$el.main.color = "#19A099";
-        } else if(temp < 60 && temp >= 80){
-          //            this.$el.subMainBkgd.backgroundColor = "#7C7B5B";
-          //            this.$el.subMain.color = "#7C7B5B";
-          //            this.$el.mainBkgd.backgroundColor = "#DBA832";
-          //            this.$el.main.color = "#DBA832";
-        }
-//        value = color.freezing;
-
-//        this.info = value;
-//        console.log(value)
-        
-        
+        if(temp <= 20){
+          this.main.bkgd = 'backgroundColor: #1963A0'
+          this.main.color = 'color: #1963A0'
+          this.subMain.bkgd = 'backgroundColor: #4C5568'
+          this.subMain.color = 'color: #4C5568'
+        } else if(temp > 20 && temp <= 40){
+          this.main.bkgd = 'backgroundColor: #1985A1'
+          this.main.color = 'color: #1985A1'
+          this.subMain.bkgd = 'backgroundColor: #4C5568'
+          this.subMain.color = 'color: #4C5568'
+        } else if(temp > 40 && temp <= 60){
+          this.main.bkgd = 'backgroundColor: #19A099'
+          this.main.color = 'color: #19A099'
+          this.subMain.bkgd = 'backgroundColor: #4C6368'
+          this.subMain.color = 'color: #4C6368'
+        } else if(temp > 60 && temp <= 80){
+          this.main.bkgd = 'backgroundColor: #DBA832'
+          this.main.color = 'color: #DBA832'
+          this.subMain.bkgd = 'backgroundColor: #7C725B'
+          this.subMain.color = 'color: #7C7B5B'
+        } else if(temp > 60 && temp <= 85){
+          this.main.bkgd = 'backgroundColor: #DB7E32'
+          this.main.color = 'color: #DB7E32'
+          this.subMain.bkgd = 'backgroundColor: #7C725B'
+          this.subMain.color = 'color: #7C7B5B'
+        } else if(temp > 85){
+          this.main.bkgd = 'backgroundColor: #DB323A'
+          this.main.color = 'color: #DB323A'
+          this.subMain.bkgd = 'backgroundColor: #7C615B'
+          this.subMain.color = 'color: #7C615B'
+        } 
       },
       getAddressData: function (addressData, placeResultData, id) {
         this.address = addressData;
@@ -195,60 +205,13 @@
       content: "🌪";
     }
   }
-  
-  :root {
-    --bgcolour: #ffffd0;
+  .light-grey, .grey, .black, .subMainBkgd, .mainBkgd{
+    width: 100px;
+    height:100px;
+    display: block;
   }
-  $light-grey: #DDDDDD;
-  $grey: #C2C5C6;
-  $black: #46464C;
-  $sub-main: #4C5568;
-  $main: #1963A0;
   
-  .light-grey{
-    background-color: #DDDDDD;
-    width: 100px;
-    height:100px;
-    display: block;
-}
-/*  #DDDDDD;*/
-  
-  .grey{
-    background-color: #c4c4c4;
-    width: 100px;
-    height:100px;
-    display: block;
-}
 /*  #C2C5C6;*/
-  
-  .black{
-    background-color: #4C4746;
-    width: 100px;
-    height:100px;
-    display: block;
-}
-  *{
-    color: #4C4746;
-  }
-  .subMainBkgd{
-    background-color: #4C5568;
-    width: 100px;
-    height:100px;
-    display: block;
-}
-  
-  .mainBkgd{
-    background-color: #1963A0;
-    width: 100px;
-    height:100px;
-    display: block;
-}
-  .subMain{
-    color: #4C5568;
-}
-  .main{
-    color: #1963A0;
-}
   
 </style>
 
@@ -269,7 +232,6 @@ lon +
 warm
 61-80
 yellow
-
 $light-grey: #DDDDDD;
 $grey: #C2C6C3;
 $black: #4C4746;
@@ -277,8 +239,6 @@ $black: #4C4746;
 hot
 81-95
 orange
-
-
 $light-grey: #DDDDDD;
 $grey: #C2C6C2;
 $black: #4C4746;
@@ -290,7 +250,6 @@ $main: #DB7E32;
 boiling
 96+
 red
-
 $light-grey: #DDDDDD;
 $grey: #C4C6C2;
 $black: #4C4846;
