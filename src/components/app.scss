@@ -45,4 +45,100 @@ table {
 //----------------
 
 
+.temp-info{
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+#map{
+  width: 50%;
+  margin: 50px 0;
+  font-size: 16px;
+  padding: 10px 15px;
+  border: 1px solid #eaeaea;
+}
+.currently-temp{
+  font-size: 50px;
+  span{
+    font-size: 160px;
+    font-weight: bold;
+  }
+}
+.temp-data{
+  display: flex;
+  width: 100%;  
+  align-items: center; 
+  justify-content: space-around;
+}
+
+.currently-wind{   
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 5px solid hotpink;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.wind-arrow{
+  width: 30px;
+  height: 0px;
+  position: absolute;
+  top: -20px;
+  left: 60px;
+  transition: 2s;   
+  transform-origin: 15px 95px;
+}
+.currently-icon{
+  &:after{
+//    position: absolute;
+//    right: 100px;
+//    top: 200px;
+    display: block;
+    font-size: 100px;
+  }
+  &.clear-day, &.clear-night{
+    &:after{
+      content: "☀️";
+    }
+  }
+  &.partly-cloudy-day, &.partly-cloudy-night{
+    &:after{
+      content: "🌤";
+    }
+  }
+  &.cloudy:after{
+    content: "☁️";
+  }
+  &.rain:after{
+    content: "🌧";
+  }
+  &.snow:after{
+    content: "🌨";
+  }
+  &.sleet:after{
+    content: "🌨";
+  }
+  &.wind:after{
+    content: "🌬";
+  }
+  &.fog:after{
+    content: "🌫";
+  }
+  &.hail:after{
+    content: "🌨";
+  }
+  &.thunderstrom:after{
+    content: "🌩";
+  }
+  &.tornado:after{
+    content: "🌪";
+  }
+}
+.light-grey, .grey, .black, .subMainBkgd, .mainBkgd{
+  width: 100px;
+  height:100px;
+  display: block;
+}
 

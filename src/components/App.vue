@@ -1,35 +1,43 @@
 <template>
-  <div id="app" v-bind:style="white.bkgd">
+  <div id="app" v-bind:style="pallet.white.bkgd">
     <div class="temp-info">
       <vue-google-autocomplete ref="address" id="map" classname="form-control" placeholder="74th Street, Jackson Heights, NY, USA" v-on:placechanged="getAddressData"></vue-google-autocomplete>
+      <div class="temp-data" v-bind:style="pallet.lightGrey.bkgd">
+        <div class="currently-icon" v-bind:class="weather.body.currently.icon"></div>
+        <div class="currently-temp"><p  v-bind:style="pallet.main.color"><span v-html="Math.round(weather.body.currently.apparentTemperature)"></span>&deg;</p></div>
+        <div class="currently-wind">
+          <p v-bind:style="pallet.black.color">{{misc.wind.direction}}</p>
+          <p v-bind:style="pallet.black.color">{{weather.body.currently.windSpeed}} MPH</p>
+          <div class="wind-arrow" v-bind:style="{transform: 'rotate(' + weather.body.currently.windBearing + 'deg)'}"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 78.6 95.4" style="enable-background:new 0 0 78.6 95.4;" xml:space="preserve">
+            <polygon points="2.3,2.5 39.3,94.5 76.3,2.5 39.3,21.5 " style="stroke:#c4c4c4;fill:#c4c4c4;stroke-width:4;stroke-linejoin:round;"/>
+            </svg>
+          </div>
+        </div>
+      </div>
       
       
-      <p class="currently-temp" v-bind:style="main.color"><span v-html="Math.round(weather.body.currently.apparentTemperature)"></span>&deg;</p>
       
-      <p v-bind:style="black.color">Dew Point: {{weather.body.currently.dewPoint}}</p>
-      <p v-bind:style="black.color">Wind Speed: {{weather.body.currently.windSpeed}}</p>
-      <p v-bind:style="black.color">UV Index: {{weather.body.currently.uvIndex}}</p>
+      <p v-bind:style="pallet.black.color">Dew Point: {{weather.body.currently.dewPoint}}</p>
+      <p v-bind:style="pallet.black.color">Wind Speed: {{weather.body.currently.windSpeed}}</p>
+      <p v-bind:style="pallet.black.color">UV Index: {{weather.body.currently.uvIndex}}</p>
       <p>Icon: {{weather.body.currently.icon}}</p>
-      <p v-bind:style="black.color">Cloud Coverage: {{weather.body.currently.cloudCover}}</p>
-      <p v-bind:style="black.color">Visibility: {{weather.body.currently.visibility}}</p>
-      <p v-bind:style="black.color">Wind Direction: {{weather.body.currently.windBearing}}</p>
-<!--      <p v-bind:style="black.color">{{weather.body.minutely.summary}}</p>-->
-      <div class="wind-arrow" v-bind:style="{transform: 'rotate(' + weather.body.currently.windBearing + 'deg)'}"></div>
+      <p v-bind:style="pallet.black.color">Cloud Coverage: {{weather.body.currently.cloudCover}}</p>
+      <p v-bind:style="pallet.black.color">Visibility: {{weather.body.currently.visibility}}</p>
+      <p v-bind:style="pallet.black.color">Wind Direction: {{weather.body.currently.windBearing}}</p>
+      <!--      <p v-bind:style="pallet.black.color">{{weather.body.minutely.summary}}</p>-->
     </div>
-    <div class="currently-icon" v-bind:class="weather.body.currently.icon">
       
-    </div>
+    
     <div class="bottom">
       <a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a>
     </div>
-    <div class="light-grey" v-bind:style="white.bkgd"><p v-bind:style="main.color">TESTING</p><p v-bind:style="subMain.color">TESTING</p></div>
-    <div class="grey" v-bind:style="grey.bkgd"></div>
-    <div class="black" v-bind:style="black.bkgd"></div>
-    <div class="subMainBkgd" v-bind:style="subMain.bkgd"></div>
-    <div class="mainBkgd" v-bind:style="main.bkgd"></div>
+    <div class="light-grey" v-bind:style="pallet.white.bkgd"><p v-bind:style="pallet.main.color">TESTING</p><p v-bind:style="pallet.subMain.color">TESTING</p></div>
+    <div class="grey" v-bind:style="pallet.grey.bkgd"></div>
+    <div class="black" v-bind:style="pallet.black.bkgd"></div>
+    <div class="subMainBkgd" v-bind:style="pallet.subMain.bkgd"></div>
+    <div class="mainBkgd" v-bind:style="pallet.main.bkgd"></div>
   
   
-
 <!--
   <img
        src="https://vuejs.org/images/logo.png"
@@ -48,25 +56,40 @@
     data: function () {
       return {
         weather: [],
-        main: {
-          bkgd: {backgroundColor: '#1963A0'},
-          color: {color: '#1963A0'},
+        pallet: {
+          main: {
+            bkgd: {backgroundColor: '#1963A0'},
+            color: {color: '#1963A0'},
+          },
+          subMain: {
+            bkgd: {backgroundColor: '#4C5568'},
+            color: {color: '#4C5568'},
+          },
+          black: {
+            bkgd: {backgroundColor: '#333333'},
+            color: {color: '#333333'},
+            stroke: {stroke: '#333333'},
+          },
+          grey: {
+            bkgd: {backgroundColor: '#c4c4c4'},
+            color: {color: '#c4c4c4'},
+            stroke: {stroke: '#c4c4c4'},
+          },
+          lightGrey: {
+            bkgd: {backgroundColor: '#ececec'},
+            color: {color: '#ececec'},
+            stroke: {stroke: '#ececec'},
+          },
+          white: {
+            bkgd: {backgroundColor: '#f7f7f7'},
+            color: {color: '#f7f7f7'},
+            stroke: {stroke: '#f7f7f7'},
+          }
         },
-        subMain: {
-          bkgd: {backgroundColor: '#4C5568'},
-          color: {color: '#4C5568'},
-        },
-        blackw: {
-          bkgd: {backgroundColor: '#333333'},
-          color: {color: '#333333'},
-        },
-        grey: {
-          bkgd: {backgroundColor: '#c4c4c4'},
-          color: {color: '#c4c4c4'},
-        },
-        white: {
-          bkgd: {backgroundColor: '#f7f7f7'},
-          color: {color: '#f7f7f7'},
+        misc:{
+          wind:{
+            direction: "N"
+          }
         }
       }
     },
@@ -81,45 +104,54 @@
     methods: {
       colorChange: function(temp) {
         if(temp <= 20){
-          this.main.bkgd = 'backgroundColor: #1963A0'
-          this.main.color = 'color: #1963A0'
-          this.subMain.bkgd = 'backgroundColor: #4C5568'
-          this.subMain.color = 'color: #4C5568'
+          this.pallet.main.bkgd = 'backgroundColor: #1963A0'
+          this.pallet.main.color = 'color: #1963A0'
+          this.pallet.subMain.bkgd = 'backgroundColor: #4C5568'
+          this.pallet.subMain.color = 'color: #4C5568'
         } else if(temp > 20 && temp <= 40){
-          this.main.bkgd = 'backgroundColor: #1985A1'
-          this.main.color = 'color: #1985A1'
-          this.subMain.bkgd = 'backgroundColor: #4C5568'
-          this.subMain.color = 'color: #4C5568'
+          this.pallet.main.bkgd = 'backgroundColor: #1985A1'
+          this.pallet.main.color = 'color: #1985A1'
+          this.pallet.subMain.bkgd = 'backgroundColor: #4C5568'
+          this.pallet.subMain.color = 'color: #4C5568'
         } else if(temp > 40 && temp <= 60){
-          this.main.bkgd = 'backgroundColor: #19A099'
-          this.main.color = 'color: #19A099'
-          this.subMain.bkgd = 'backgroundColor: #4C6368'
-          this.subMain.color = 'color: #4C6368'
+          this.pallet.main.bkgd = 'backgroundColor: #19A099'
+          this.pallet.main.color = 'color: #19A099'
+          this.pallet.subMain.bkgd = 'backgroundColor: #4C6368'
+          this.pallet.subMain.color = 'color: #4C6368'
         } else if(temp > 60 && temp <= 80){
-          this.main.bkgd = 'backgroundColor: #DBA832'
-          this.main.color = 'color: #DBA832'
-          this.subMain.bkgd = 'backgroundColor: #7C725B'
-          this.subMain.color = 'color: #7C7B5B'
+          this.pallet.main.bkgd = 'backgroundColor: #DBA832'
+          this.pallet.main.color = 'color: #DBA832'
+          this.pallet.subMain.bkgd = 'backgroundColor: #7C725B'
+          this.pallet.subMain.color = 'color: #7C7B5B'
         } else if(temp > 60 && temp <= 85){
-          this.main.bkgd = 'backgroundColor: #DB7E32'
-          this.main.color = 'color: #DB7E32'
-          this.subMain.bkgd = 'backgroundColor: #7C725B'
-          this.subMain.color = 'color: #7C7B5B'
+          this.pallet.main.bkgd = 'backgroundColor: #DB7E32'
+          this.pallet.main.color = 'color: #DB7E32'
+          this.pallet.subMain.bkgd = 'backgroundColor: #7C725B'
+          this.pallet.subMain.color = 'color: #7C7B5B'
         } else if(temp > 85){
-          this.main.bkgd = 'backgroundColor: #DB323A'
-          this.main.color = 'color: #DB323A'
-          this.subMain.bkgd = 'backgroundColor: #7C615B'
-          this.subMain.color = 'color: #7C615B'
+          this.pallet.main.bkgd = 'backgroundColor: #DB323A'
+          this.pallet.main.color = 'color: #DB323A'
+          this.pallet.subMain.bkgd = 'backgroundColor: #7C615B'
+          this.pallet.subMain.color = 'color: #7C615B'
         } 
+      },
+      degToCompass: function(num) {
+        const val = Math.floor((num / 22.5) + 0.5);
+        const arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+        //      
+        this.misc.wind.direction = arr[(val % 16)]
       },
       getAddressData: function (addressData, placeResultData, id) {
         this.address = addressData;
         this.$http.get('https://api.darksky.net/forecast/5f6017631b7105c5ca8dc4d7c06b3c88/' + addressData.latitude + ',' + addressData.longitude)
           .then(response => {
           console.log("fired");
+          console.log(response);
           this.weather = response;
           const atemp = response.body.currently.apparentTemperature;
           this.colorChange(atemp);
+          const direction = response.body.currently.windBearing;
+          this.degToCompass(direction);
         });
       }
     }
@@ -131,85 +163,6 @@
 
 <style lang="scss" scoped>
   @import "app.scss";
-  .temp-info{
-    width: 70%;
-    margin: 0 auto;
-    text-align: center;
-  }
-    .wind-arrow{
-      background: url(assets/windArrow.svg);
-      width: 70px;
-      height: 100px;
-      position: absolute;
-      top: 100px;
-      left: 200px;
-      transition: 2s;
-  }
-  #map{
-    width: 50%;
-    margin: 50px 0;
-    font-size: 16px;
-    padding: 10px 15px;
-    border: 1px solid #eaeaea;
-  }
-  .currently-temp{
-    font-size: 50px;
-    span{
-      font-size: 100px;
-      font-weight: bold;
-    }
-  }
-  .currently-icon{
-    &:after{
-      position: absolute;
-      right: 100px;
-      top: 200px;
-      display: block;
-      font-size: 100px;
-    }
-    &.clear-day, &.clear-night{
-      &:after{
-        content: "☀️";
-      }
-    }
-    &.partly-cloudy-day, &.partly-cloudy-night{
-      &:after{
-        content: "🌤";
-      }
-    }
-    &.cloudy:after{
-      content: "☁️";
-    }
-    &.rain:after{
-      content: "🌧";
-    }
-    &.snow:after{
-      content: "🌨";
-    }
-    &.sleet:after{
-      content: "🌨";
-    }
-    &.wind:after{
-      content: "🌬";
-    }
-    &.fog:after{
-      content: "🌫";
-    }
-    &.hail:after{
-      content: "🌨";
-    }
-    &.thunderstrom:after{
-      content: "🌩";
-    }
-    &.tornado:after{
-      content: "🌪";
-    }
-  }
-  .light-grey, .grey, .black, .subMainBkgd, .mainBkgd{
-    width: 100px;
-    height:100px;
-    display: block;
-  }
   
 /*  #C2C5C6;*/
   
